@@ -1,22 +1,28 @@
 public class PalindromeChecker {
 
-    public static boolean isPalindrome(String str, int start, int end) {
+    public static boolean isPalindrome(String str) {
 
-        // Base Condition
-        if (start >= end)
-            return true;
+        // Step 1: Normalize string
+        str = str.toLowerCase();
+        str = str.replaceAll("[^a-z0-9]", "");
 
-        // If mismatch
-        if (str.charAt(start) != str.charAt(end))
-            return false;
+        int start = 0;
+        int end = str.length() - 1;
 
-        // Recursive call
-        return isPalindrome(str, start + 1, end - 1);
+        // Step 2: Compare using two pointers
+        while (start < end) {
+            if (str.charAt(start) != str.charAt(end))
+                return false;
+
+            start++;
+            end--;
+        }
+
+        return true;
     }
 
     public static void main(String[] args) {
-        String input = "level";
-        System.out.println("Is Palindrome? " +
-                isPalindrome(input, 0, input.length() - 1));
+        String input = "A man a plan a canal Panama";
+        System.out.println("Is Palindrome? " + isPalindrome(input));
     }
 }
