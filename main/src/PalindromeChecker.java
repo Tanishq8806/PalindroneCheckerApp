@@ -1,28 +1,27 @@
-public class PalindromeChecker {
+import java.util.Scanner;
+import java.util.Stack;
 
-    public static boolean isPalindrome(String str) {
+// PalindromeChecker class (Encapsulation)
+class PalindromeChecker {
 
-        // Step 1: Normalize string
-        str = str.toLowerCase();
-        str = str.replaceAll("[^a-z0-9]", "");
+    // Method to check palindrome
+    public boolean checkPalindrome(String input) {
 
-        int start = 0;
-        int end = str.length() - 1;
+        Stack<Character> stack = new Stack<>();
 
-        // Step 2: Compare using two pointers
-        while (start < end) {
-            if (str.charAt(start) != str.charAt(end))
+        // Push characters into stack
+        for (int i = 0; i < input.length(); i++) {
+            stack.push(input.charAt(i));
+        }
+
+        // Compare characters
+        for (int i = 0; i < input.length(); i++) {
+            if (input.charAt(i) != stack.pop()) {
                 return false;
-
-            start++;
-            end--;
+            }
         }
 
         return true;
     }
-
-    public static void main(String[] args) {
-        String input = "A man a plan a canal Panama";
-        System.out.println("Is Palindrome? " + isPalindrome(input));
-    }
 }
+
